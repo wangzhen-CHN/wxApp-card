@@ -3,7 +3,13 @@
 
 Page({
   data: {
-    logs: []
+    popupShow: false
   },
-  onLoad: function () { }
+  handleAdd(){
+    this.setData({popupShow:true})
+  },
+  onPopupClose(){
+    this.setData({popupShow:false})
+  }
+
 })

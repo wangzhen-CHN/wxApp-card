@@ -1,1 +1,15 @@
+.card-popup-img {
+  width: 100%;
+  text-align: center;
+}
 
+.card-popup-btn {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}
+
+.card-popup-btn button {
+  width: 80%;
+  margin: 0 auto;
+}

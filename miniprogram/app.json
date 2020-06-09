@@ -18,24 +18,22 @@
   "tabBar": {
     "color": "#888d93",
     "selectedColor": "#3341d5",
-    "list": [
-      {
-        "selectedIconPath": "./images/music-a.png",
-        "iconPath": "./images/music.png",
-        "pagePath": "pages/cardList/cardList",
-        "text": "卡卡"
-      }, {
-        "selectedIconPath": "./images/v-a.png",
-        "iconPath": "./images/v.png",
-        "pagePath": "pages/index/index",
-        "text": "开发"
-      }, {
-        "selectedIconPath": "./images/me-a.png",
-        "iconPath": "./images/me.png",
-        "pagePath": "pages/index/index",
-        "text": "我的"
-      }
-    ]
+    "list": [{
+      "selectedIconPath": "./images/music-a.png",
+      "iconPath": "./images/music.png",
+      "pagePath": "pages/cardList/cardList",
+      "text": "卡卡"
+    }, {
+      "selectedIconPath": "./images/v-a.png",
+      "iconPath": "./images/v.png",
+      "pagePath": "pages/index/index",
+      "text": "开发"
+    }, {
+      "selectedIconPath": "./images/me-a.png",
+      "iconPath": "./images/me.png",
+      "pagePath": "pages/index/index",
+      "text": "我的"
+    }]
   },
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -45,5 +43,11 @@
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",
-  "style": "v2"
+  "usingComponents": {
+    "van-button": "@vant/weapp/button/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index"
+  }
 }

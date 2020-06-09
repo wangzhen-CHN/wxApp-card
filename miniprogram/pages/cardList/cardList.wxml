@@ -1,4 +1,18 @@
 <!--logs.wxml-->
 <view class="container log-list">
-  <button type="primary" plain="true">添加卡片</button>
+	<van-button type="primary" bind:click="handleAdd">添加卡片</van-button>
+	<van-popup show="{{ popupShow }}" round position="bottom" custom-style="height: 80%;padding-top:20px" bind:close="onPopupClose">
+  <view class="card-popup-img">
+    <image src="https://img.yzcdn.cn/vant/cat.jpeg"></image>
+  </view>
+		<van-cell-group>
+			<van-field value="{{ cardNo }}" label="银行卡号" placeholder="请输入银行卡号" />
+			<van-field value="{{ value }}" label="账单日" placeholder="请输入账单日" />
+			<van-field value="{{ value }}" label="还款日" placeholder="请输入还款日" />
+			<van-field value="{{ value }}" label="额度" placeholder="请输入账单日" />
+		</van-cell-group>
+    <view class="card-popup-btn">
+      <van-button round plain block type="info">确定</van-button>
+     </view>
+	</van-popup>
 </view>
