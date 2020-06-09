@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "pages/cardList/cardList",
+    "pages/index/index",
+    "pages/userConsole/userConsole",
+    "pages/storageConsole/storageConsole",
+    "pages/databaseGuide/databaseGuide",
+    "pages/addFunction/addFunction",
+    "pages/deployFunctions/deployFunctions",
+    "pages/chooseLib/chooseLib",
+    "pages/openapi/openapi",
+    "pages/openapi/serverapi/serverapi",
+    "pages/openapi/callback/callback",
+    "pages/openapi/cloudid/cloudid",
+    "pages/im/im",
+    "pages/im/room/room"
+  ],
+  "tabBar": {
+    "color": "#888d93",
+    "selectedColor": "#3341d5",
+    "list": [
+      {
+        "selectedIconPath": "./images/music-a.png",
+        "iconPath": "./images/music.png",
+        "pagePath": "pages/cardList/cardList",
+        "text": "卡卡"
+      }, {
+        "selectedIconPath": "./images/v-a.png",
+        "iconPath": "./images/v.png",
+        "pagePath": "pages/index/index",
+        "text": "开发"
+      }, {
+        "selectedIconPath": "./images/me-a.png",
+        "iconPath": "./images/me.png",
+        "pagePath": "pages/index/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "全能卡包",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}
