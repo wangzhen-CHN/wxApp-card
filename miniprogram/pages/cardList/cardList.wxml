@@ -1,18 +1,44 @@
-<!--logs.wxml-->
-<view class="container log-list">
-	<van-button type="primary" bind:click="handleAdd">添加卡片</van-button>
+<!--cardlist.wxml-->
+<view class="container card-list">
+	<view class="popup-card" wx:for="{{cardList}}" style="margin-top:20px" wx:key="{{item._id}}">
+		<view class="popup-bank-logo">
+			<image src="../../images/icon-bank/{{item.bankInfo.bankCode}}.png" style="width:300rpx;height:120rpx"></image>
+		</view>
+		<view class="popup-card-num">{{item.cardNo}}</view>
+		<view class="popup-card-footer">
+			<view class="popup-card-billday">账单日：每月{{item.billday}}号</view>
+			<view class="popup-card-org">
+				<image src="../../images/icon-bank/card-org/card-{{item.cardOrg}}.png" style="width:60px;height:60px"></image>
+			</view>
+		</view>
+	</view>
+	<van-button bind:click="handleAdd" block style="margin-top:30px">添加卡片</van-button>
 	<van-popup show="{{ popupShow }}" round position="bottom" custom-style="height: 80%;padding-top:20px" bind:close="onPopupClose">
-  <view class="card-popup-img">
-    <image src="https://img.yzcdn.cn/vant/cat.jpeg"></image>
-  </view>
-		<van-cell-group>
-			<van-field value="{{ cardNo }}" label="银行卡号" placeholder="请输入银行卡号" />
-			<van-field value="{{ value }}" label="账单日" placeholder="请输入账单日" />
-			<van-field value="{{ value }}" label="还款日" placeholder="请输入还款日" />
-			<van-field value="{{ value }}" label="额度" placeholder="请输入账单日" />
-		</van-cell-group>
-    <view class="card-popup-btn">
-      <van-button round plain block type="info">确定</van-button>
-     </view>
+		<view class="popup-card">
+			<view class="popup-bank-logo">
+				<image wx:if="{{bankIcon}}" src="{{bankIcon}}" style="width:300rpx;height:120rpx"></image>
+				<van-skeleton wx:else title avatar avatar-size="40px" animate="{{false}}" />
+			</view>
+			<view class="popup-card-num">{{cardNo}}</view>
+			<view class="popup-card-footer">
+				<view class="popup-card-billday">账单日：每月{{billday}}号</view>
+				<view class="popup-card-org">
+					<image wx:if="{{orgIcon}}" src="{{orgIcon}}" style="width:60px;height:60px"></image>
+					<van-skeleton wx:else title title-width="70" animate="{{false}}" />
+				</view>
+			</view>
+		</view>
+		<form catchsubmit="formSubmit">
+			<van-cell-group>
+				<van-field name="cardNo" bind:change="getBankInfo" required type="number" label="银行卡号" maxlength="16" placeholder="请输入银行卡号" />
+				<van-field name="billDay" bind:change="getBillDay" required type="number" label="账单日" maxlength="2" placeholder="请输入账单日" />
+				<van-field name="payDay" bind:change="getPayDay" type="number" label="还款日" required maxlength="2" placeholder="请输入还款日" />
+				<van-field name="limit" bind:change="getLimit" type="number" label="额度" maxlength="7" placeholder="请输入额度" />
+				<van-field name="remake" bind:change="getRemake" type="number" label="备注" maxlength="100" placeholder="有效期，CVV2等" />
+			</van-cell-group>
+			<view class="popup-btn">
+				<button round plain block type="info" formType="submit">确定</button>
+			</view>
+		</form>
 	</van-popup>
 </view>

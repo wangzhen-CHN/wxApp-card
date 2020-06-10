@@ -48,6 +48,7 @@
     "van-popup": "@vant/weapp/popup/index",
     "van-field": "@vant/weapp/field/index",
     "van-cell": "@vant/weapp/cell/index",
+    "van-skeleton": "@vant/weapp/skeleton/index",
     "van-cell-group": "@vant/weapp/cell-group/index"
   }
 }
