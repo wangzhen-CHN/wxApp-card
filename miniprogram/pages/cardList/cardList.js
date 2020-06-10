@@ -17,6 +17,7 @@ Page({
     payDay: '', //还款日
     limit: '', //额度
     remake: '',
+    lastTapTime:0,
 
   },
   onLoad: function () {
@@ -199,5 +200,29 @@ Page({
       }
     })
   },
-
+  doubleClick: function (e) {
+    console.log(e)
+    var curTime = e.timeStamp
+    var lastTime = e.currentTarget.dataset.time  // 通过e.currentTarget.dataset.time 访问到绑定到该组件的自定义数据
+    if (curTime - lastTime > 0) {
+      if (curTime - lastTime < 300) {//是双击事件
+        wx.setClipboardData({
+          data: e.currentTarget.dataset.cardno,
+          success: function (res) {
+            wx.getClipboardData({
+              success: function (res) {
+                wx.showToast({
+                  title: '复制成功'
+                })
+              }
+            })
+          }
+        })
+        console.log(e.currentTarget.dataset.cardno)
+      }
+    }
+    this.setData({
+      lastTapTime: curTime
+    })
+  },
 })

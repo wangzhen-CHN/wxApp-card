@@ -1,10 +1,10 @@
 <!--cardlist.wxml-->
 <view class="container card-list">
-	<view class="popup-card" wx:for="{{cardList}}" style="margin-top:20px" wx:key="{{item._id}}">
+	<view class="popup-card" wx:for="{{cardList}}" style="margin-top:20px" wx:key="_id">
 		<view class="popup-bank-logo">
 			<image src="../../images/icon-bank/{{item.bankInfo.bankCode}}.png" style="width:300rpx;height:120rpx"></image>
 		</view>
-		<view class="popup-card-num">{{item.cardNo}}</view>
+		<view class="popup-card-num" bindtap="doubleClick" data-time="{{lastTapTime}}" data-cardNo="{{item.cardNo}}">{{item.cardNo}}</view>
 		<view class="popup-card-footer">
 			<view class="popup-card-billday">账单日：每月{{item.billday}}号</view>
 			<view class="popup-card-org">
