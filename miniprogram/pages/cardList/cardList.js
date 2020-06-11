@@ -11,13 +11,13 @@ Page({
     orgIcon: '',
     cardOrg: '', //卡组织
     bankInfo: {},
+    formData: {},
     bankIcon: '',
     cardNo: '**** **** **** ****',
-    billday: '*', //账单日
-    payDay: '', //还款日
-    limit: '', //额度
-    remake: '',
-    lastTapTime:0,
+    billday:'*',
+    cardType: '',
+    lastTapTime: 0,
+    activeCard: 0,
 
   },
   onLoad: function () {
@@ -38,26 +38,22 @@ Page({
       popupShow: false
     })
   },
-  getBillDay(event) {
+  setFormValue(event) {
+    if (event.currentTarget.dataset.params==='billDay') {
+      this.setData({
+        'billday': event.detail.value
+      })
+    }
+    const obj = {}
+    obj[event.currentTarget.dataset.params] = event.detail.value
     this.setData({
-      'billday': event.detail.length === 0 ? '*' : event.detail
+      'formData': {
+        ...this.data.formData,
+        ...obj
+      }
     })
   },
-  getPayDay(event) {
-    this.setData({
-      'payDay': event.detail
-    })
-  },
-  getLimit(event) {
-    this.setData({
-      'limit': event.detail
-    })
-  },
-  getRemake(event) {
-    this.setData({
-      'remake': event.detail
-    })
-  },
+
   getBankInfo(event) {
     this.setData({
       'cardNo': event.detail
@@ -70,11 +66,12 @@ Page({
           cardNo: event.detail
         },
         success: res => {
-          console.log('[云函数] [bankinfo] : ', `../../images/icon-bank/${res.result.bankCode}.png`)
+          console.log('[云函数] [bankinfo] : ', res.result)
           if (res.result.bankCode != 400) {
             this.setData({
               'bankIcon': `../../images/icon-bank/${res.result.bankCode}.png`,
-              'bankInfo': res.result
+              'bankInfo': res.result,
+              'cardType': res.result.cardType
             })
           }
         },
@@ -121,31 +118,37 @@ Page({
       this.setData({
         'sendCloud': true,
         'checkOrg': true,
+        'billday':'*',
         'orgIcon': '',
+        'bankIcon':'',
         'cardNo': '**** **** **** ****',
       })
     }
+  },
+  clearBankInfo(){
+    this.setData({
+      'sendCloud': true,
+      'checkOrg': true,
+      'orgIcon': '',
+      'billday':'*',
+      'bankIcon':'',
+      'cardNo': '**** **** **** ****',
+    })
   },
   formSubmit() {
     const {
       cardOrg,
       cardNo,
-      billday,
-      payDay,
-      limit,
       bankInfo,
-      remake
+      formData,
     } = this.data
     const cardInfo = {
       cardOrg,
       cardNo,
-      billday,
-      payDay,
-      limit,
-      bankInfo,
-      remake
+      ...formData,
+      ...bankInfo
     }
-    // console.log('form发生了submit事件，携带数据为：', cardInfo)
+    console.log(cardInfo)
     this.onAdd(cardInfo) //添加到数据库
   },
   onAdd: function (params) {
@@ -203,9 +206,9 @@ Page({
   doubleClick: function (e) {
     console.log(e)
     var curTime = e.timeStamp
-    var lastTime = e.currentTarget.dataset.time  // 通过e.currentTarget.dataset.time 访问到绑定到该组件的自定义数据
+    var lastTime = e.currentTarget.dataset.time // 通过e.currentTarget.dataset.time 访问到绑定到该组件的自定义数据
     if (curTime - lastTime > 0) {
-      if (curTime - lastTime < 300) {//是双击事件
+      if (curTime - lastTime < 300) { //是双击事件
         wx.setClipboardData({
           data: e.currentTarget.dataset.cardno,
           success: function (res) {
@@ -225,4 +228,16 @@ Page({
       lastTapTime: curTime
     })
   },
+  setActiveCard(e) {
+    const no = e.currentTarget.dataset.no
+    if (this.data.activeCard === no) {
+      this.setData({
+        activeCard: 0
+      })
+    } else {
+      this.setData({
+        activeCard: no
+      })
+    }
+  }
 })
