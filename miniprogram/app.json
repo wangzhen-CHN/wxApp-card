@@ -17,17 +17,17 @@
   ],
   "tabBar": {
     "color": "#888d93",
-    "selectedColor": "#3341d5",
+    "selectedColor": "#3889FF",
     "list": [{
-      "selectedIconPath": "./images/music-a.png",
-      "iconPath": "./images/music.png",
+      "selectedIconPath": "./images/card-a.png",
+      "iconPath": "./images/card.png",
       "pagePath": "pages/cardList/cardList",
       "text": "卡卡"
     }, {
-      "selectedIconPath": "./images/v-a.png",
-      "iconPath": "./images/v.png",
+      "selectedIconPath": "./images/activity-a.png",
+      "iconPath": "./images/activity.png",
       "pagePath": "pages/index/index",
-      "text": "开发"
+      "text": "活动"
     }, {
       "selectedIconPath": "./images/me-a.png",
       "iconPath": "./images/me.png",
