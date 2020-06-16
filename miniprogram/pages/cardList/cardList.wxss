@@ -76,7 +76,7 @@
 .popup-card-billday{
   font-size: 12px;
 }
-.card-list .card-item{
+.card-box .card-item{
   box-shadow: 5px 5px 20px aliceblue;
   margin-top:-120px;
   transition: transform 0.5S;
@@ -94,4 +94,49 @@
 .card-item-active{
   transform: translateY(-10px);
   z-index: 99;
+}
+.banner-box{
+  width: 92%;
+  height: 180px;
+  position: relative;
+  margin: 20rpx auto;
+}
+.banner-box image{
+
+  width: 100%;
+  height: 180px;
+  border-radius: 20rpx;
+}
+.banner-day{
+  font-size: 48rpx;
+  color: #ffffff;
+  position: absolute;
+  top: 60rpx;
+  left: 60rpx;
+}
+.banner-day-num{
+  font-size: 88rpx;
+}
+.banner-account{
+  margin-top: 40rpx;
+  font-size: 30rpx;
+}
+.card-list-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20rpx 5%;
+  padding-bottom: 30rpx;
+
+}
+
+.card-title-name {
+  font-size: 40rpx;
+  font-weight: 600;
+}
+
+.card-title-more {
+  font-size: 24rpx;
+  color: #abb0bf;
 }

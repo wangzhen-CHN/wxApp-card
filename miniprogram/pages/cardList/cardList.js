@@ -12,6 +12,7 @@ Page({
     cardOrg: '', //卡组织
     bankInfo: {},
     formData: {},
+    today:{},
     bankIcon: '',
     cardNo: '**** **** **** ****',
     billday:'*',
@@ -26,6 +27,9 @@ Page({
         openid: app.globalData.openid
       })
     }
+    this.setData({
+      today: new Date().getUTCDate()
+    })
     this.onQuery()
   },
   handleAdd() {
