@@ -83,7 +83,7 @@ function bankCardAttribution(bankCard){
       reg: /^(45806|53098|45806|53098)/g,
       cardType: "CC"
     }, {
-      reg: /^(622210|622211|622212|622213|622214|622220|622223|622225|622229|622215|622224)/g,
+      reg: /^(622210|622211|622212|622213|622214|622220|622223|622225|622229|622215|622224|622599)/g,
       cardType: "SCC"
     }, {
       reg: /^(620054|620142|620184|620030|620050|620143|620149|620124|620183|620094|620186|620148|620185)/g,
@@ -518,7 +518,6 @@ function bankCardAttribution(bankCard){
           info['cardTypeName'] = getCardTypeName(info['cardType']);
           delete info.patterns;
           delete info.reg;
-          delete info.cardType;
           console.timeEnd("执行耗时");
           return info;//返回银行卡结果
         }

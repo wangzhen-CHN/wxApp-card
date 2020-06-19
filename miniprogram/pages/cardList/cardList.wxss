@@ -118,7 +118,7 @@
   font-size: 88rpx;
 }
 .banner-account{
-  margin-top: 40rpx;
+  margin-top: 30rpx;
   font-size: 30rpx;
 }
 .card-list-title {
