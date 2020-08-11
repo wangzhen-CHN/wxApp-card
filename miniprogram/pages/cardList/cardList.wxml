@@ -6,16 +6,38 @@
 		<view class="banner-day">
 			<view>今天</view>
 			<view class="banner-day-num">{{today}} <span style="font-size:28rpx">日</span></view>
-			<view class="banner-account">风大雨大，有你就是天涯</view>
 		</view>
+		<view class="banner-word">风大雨大，有你就是天涯</view>
 	</view>
 	<view class="card-list-title">
 		<view class="card-title-name">全部卡片</view>
-		<view class="card-title-more">添加
-			<van-icon name="plus" color="#abb0bf" />
+		<view class="card-title-add">
+			<van-icon name="plus" bind:click="handleAdd" />
 		</view>
 	</view>
 	<view class="card-box">
+		<view class="card-item" wx:for="{{cardList}}" wx:key="_id">
+			<view class="card-info">
+				<view class="card-info-left" data-row="{{item}}" bindtap="handleDetail">
+					<image src="../../images/bank/{{item.bankCode}}.png" style="width:80rpx;height:80rpx"></image>
+					<view class="card-info-name">
+						<view class="bank-name">{{item.bankName}}</view>
+						<view class="card-num">{{item.cardNoFormat}}</view>
+					</view>
+				</view>
+				<view class="card-info-right">
+					<van-button type="info" size="mini" data-cardNo="{{item.cardNo}}" bind:click="copyCardNo">复制卡号</van-button>
+				</view>
+			</view>
+			<view class="card-info-other">
+				<view>
+					{{item.cardTypeName}}
+				</view>
+				<view wx:if="{{item.cardType==='CC'||item.cardType==='SCC'}}">账单日：每月{{item.payDay}}号</view>
+			</view>
+		</view>
+	</view>
+	<!-- <view class="card-box">
 		<view wx:for="{{cardList}}" wx:key="_id" class="popup-card card-item {{activeCard==item.cardNo?'card-item-active':''}}">
 			<view class="popup-bank-logo" data-no="{{item.cardNo}}" bindtap="setActiveCard">
 				<image src="../../images/icon-bank/{{item.bankCode}}.png" style="width:300rpx;height:120rpx"></image>
@@ -31,8 +53,8 @@
 				</view>
 			</view>
 		</view>
-	</view>
-	<van-button bind:click="handleAdd" block>添加卡片</van-button>
+	</view> -->
+	<!-- <van-button bind:click="handleAdd" block>添加卡片</van-button> -->
 	<van-popup show="{{ popupShow }}" round duration="500" position="bottom" custom-style="height: 80%;padding-top:20px" bind:close="onPopupClose">
 		<view class="popup-card">
 			<view class="popup-bank-logo">

@@ -13,13 +13,16 @@ Page({
     bankInfo: {},
     formData: {},
     today:{},
+    cardInfo:{
+      bankIcon: '',
+      cardNo: '**** **** **** ****',
+      billday:'*',
+      cardType: '',
+    },
     bankIcon: '',
     cardNo: '**** **** **** ****',
     billday:'*',
     cardType: '',
-    lastTapTime: 0,
-    activeCard: 0,
-
   },
   onLoad: function () {
     if (app.globalData.openid) {
@@ -36,6 +39,12 @@ Page({
     this.setData({
       popupShow: true
     })
+  },
+  handleDetail(e) {
+    this.setData({
+      popupShow: true
+    })
+    console.log(e.currentTarget.dataset)
   },
   onPopupClose() {
     this.setData({
@@ -193,6 +202,10 @@ Page({
       _openid: this.data.openid
     }).get({
       success: res => {
+        res.data.map(item=>{
+          // item.cardNoFormat=item.cardNo.replace(/\s/g,'').replace(/[^\d]/g,'').replace(/(\d{4})(?=\d)/g,'$1 ')
+          item.cardNoFormat = item.cardNo.replace(/^(\d{4})\d+(\d{4})$/, "$1 **** **** $2");
+        })
         this.setData({
           cardList: res.data
         })
@@ -207,41 +220,20 @@ Page({
       }
     })
   },
-  doubleClick: function (e) {
-    console.log(e)
-    var curTime = e.timeStamp
-    var lastTime = e.currentTarget.dataset.time // 通过e.currentTarget.dataset.time 访问到绑定到该组件的自定义数据
-    if (curTime - lastTime > 0) {
-      if (curTime - lastTime < 300) { //是双击事件
-        wx.setClipboardData({
-          data: e.currentTarget.dataset.cardno,
+  copyCardNo(e) {
+    wx.setClipboardData({
+      data: e.currentTarget.dataset.cardno,
+      success: function (res) {
+        wx.getClipboardData({
           success: function (res) {
-            wx.getClipboardData({
-              success: function (res) {
-                wx.showToast({
-                  title: '复制成功'
-                })
-              }
+            wx.showToast({
+              icon:'none',
+              duration:1000,
+              title: '复制成功'
             })
           }
         })
-        console.log(e.currentTarget.dataset.cardno)
       }
-    }
-    this.setData({
-      lastTapTime: curTime
     })
-  },
-  setActiveCard(e) {
-    const no = e.currentTarget.dataset.no
-    if (this.data.activeCard === no) {
-      this.setData({
-        activeCard: 0
-      })
-    } else {
-      this.setData({
-        activeCard: no
-      })
-    }
   }
 })
