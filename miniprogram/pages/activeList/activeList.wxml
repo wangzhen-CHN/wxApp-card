@@ -1,0 +1,27 @@
+<!--cardlist.wxml-->
+<view>
+	<view class="card-list-title">
+		<view class="card-title-name">全部活动</view>
+		<view class="card-title-add">
+			<van-icon name="plus" bind:click="handleAdd" />
+		</view>
+	</view>
+	<van-popup show="{{ popupShow }}" round duration="500" position="bottom" custom-style="height: 60%;padding-top:20px" bind:close="onPopupClose">
+		<view style="margin-top:20px">
+			<van-cell-group>
+				<van-field data-params="cardNo" type="text" label="银行" maxlength="20" placeholder="请输入银行" clearable />
+				<!-- <van-picker columns="{{ columns }}" /> -->
+				<van-field data-params="cardNo" type="text" label="活动名称" maxlength="20" placeholder="请输入活动名称" clearable />
+				<van-field data-params="cardNo" type="textarea" autosize="{{ minHeight }}" label="活动内容"  clearable />
+				<van-field data-params="cardNo" type="text" label="起止时间" maxlength="20" placeholder="请输入起止时间" clearable />
+				<!-- <van-datetime-picker type="date"/> -->
+				<van-field data-params="cardNo" type="text" label="备注" maxlength="20" placeholder="请输入备注" clearable />
+			</van-cell-group>
+			<view class="popup-btn">
+				<!-- <button round plain block type="primary" bindtap="formSubmit">确定</button> -->
+				<van-button plain block type="info" bindtap="formSubmit">确定</van-button>
+				<!-- <van-button plain hairline type="info">细边框按钮</van-button> -->
+			</view>
+		</view>
+	</van-popup>
+</view>

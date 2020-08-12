@@ -92,7 +92,7 @@
   box-shadow: 0 5px 10px #eee;
   height: 200rpx;
   width: 90%;
-  margin: 0 auto 40rpx auto;
+  margin: 0 auto 35rpx auto;
   border-radius: 20rpx;
 }
 
@@ -179,10 +179,9 @@
 }
 
 .card-title-add .van-icon-plus {
-  font-size: 34rpx;
-  font-weight: 600;
-  color: #333;
-  background-color: #e7e7e7;
-  border-radius: 10rpx;
-  padding: 6rpx;
+  font-size: 28rpx;
+  color: #fff;
+  background-color: #3889FF;
+  border-radius: 20rpx;
+  padding: 6rpx 20rpx;
 }

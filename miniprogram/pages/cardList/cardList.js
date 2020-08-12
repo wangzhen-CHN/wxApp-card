@@ -12,7 +12,7 @@ Page({
     cardOrg: '', //卡组织
     bankInfo: {},
     formData: {},
-    today:{},
+    today:0,
     cardInfo:{
       bankIcon: '',
       cardNo: '**** **** **** ****',
@@ -31,8 +31,9 @@ Page({
       })
     }
     this.setData({
-      today: new Date().getUTCDate()
+      today: new Date().getUTCDate().toString()
     })
+    console.log(this.data.today)
     this.onQuery()
   },
   handleAdd() {
@@ -208,6 +209,7 @@ Page({
         })
         this.setData({
           cardList: res.data
+          // cardList: []
         })
         console.log('[数据库] [查询记录] 成功: ', res)
       },

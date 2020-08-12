@@ -1,0 +1,10 @@
+function formatString(val, len) {
+  if (val.length > len) {
+    return val.substring(val.length - len) 
+  } else {
+    return val;
+  }
+}
+module.exports = {
+  formatStr: formatString,
+}

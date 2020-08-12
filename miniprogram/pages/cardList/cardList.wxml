@@ -2,7 +2,7 @@
 <wxs module='filter' src='./filter.wxs'></wxs>
 <view>
 	<view class="banner-box">
-		<image src="http://img.mo36.com/2.png"></image>
+		<image wx:if="{{today}}" src="http://img.mo36.com/{{today}}.png"></image>
 		<view class="banner-day">
 			<view>今天</view>
 			<view class="banner-day-num">{{today}} <span style="font-size:28rpx">日</span></view>
@@ -16,7 +16,7 @@
 		</view>
 	</view>
 	<view class="card-box">
-		<view class="card-item" wx:for="{{cardList}}" wx:key="_id">
+		<view class="card-item" wx:if="{{cardList.length>0}}" wx:for="{{cardList}}" wx:key="_id">
 			<view class="card-info">
 				<view class="card-info-left" data-row="{{item}}" bindtap="handleDetail">
 					<image src="../../images/bank/{{item.bankCode}}.png" style="width:80rpx;height:80rpx"></image>
@@ -35,7 +35,9 @@
 				</view>
 				<view wx:if="{{item.cardType==='CC'||item.cardType==='SCC'}}">账单日：每月{{item.payDay}}号</view>
 			</view>
+			
 		</view>
+		<van-empty wx:if="{{cardList.length==0}}" description="没有卡片" />
 	</view>
 	<!-- <view class="card-box">
 		<view wx:for="{{cardList}}" wx:key="_id" class="popup-card card-item {{activeCard==item.cardNo?'card-item-active':''}}">
@@ -73,14 +75,15 @@
 		<view style="margin-top:20px">
 			<van-cell-group>
 				<van-field data-params="cardNo" bind:change="getBankInfo" bind:clear="clearBankInfo" type="number" label="银行卡号" maxlength="20" placeholder="请输入银行卡号" clearable />
-				<van-field data-params="billDay" bind:blur="setFormValue" type="number" label="账单日" maxlength="2" placeholder="请输入账单日" wx:if="{{cardType==='CC'||cardType==='SCC'}}" clearable />
 				<van-field data-params="payDay" bind:blur="setFormValue" type="number" label="还款日" maxlength="2" placeholder="请输入还款日" wx:if="{{cardType==='CC'||cardType==='SCC'}}" clearable />
 				<van-field data-params="limit" bind:blur="setFormValue" type="number" label="额度" maxlength="7" placeholder="请输入额度" wx:if="{{cardType==='CC'||cardType==='SCC'}}" clearable />
-				<van-field data-params="cardholder" bind:blur="setFormValue" type="text" label="持卡人" maxlength="20" placeholder="请输入持卡人" clearable />
-				<van-field data-params="nickName" bind:blur="setFormValue" type="text" label="别名" maxlength="20" placeholder="请输入别名" clearable />
+				<van-field data-params="cvv" bind:blur="setFormValue" type="number" label="CVV" maxlength="3" placeholder="请输入CVV" wx:if="{{cardType==='CC'||cardType==='SCC'}}" clearable />
+				<van-field data-params="nickName" bind:blur="setFormValue" type="text" label="别名" maxlength="20" placeholder="请输入别名" wx:if="{{cardType==='CC'||cardType==='SCC'}}" clearable />
 			</van-cell-group>
 			<view class="popup-btn">
-				<button round plain block type="info" bindtap="formSubmit">确定</button>
+				<!-- <button round plain block type="primary" bindtap="formSubmit">确定</button> -->
+				<van-button plain block type="info" bindtap="formSubmit">确定</van-button>
+				<!-- <van-button plain hairline type="info">细边框按钮</van-button> -->
 			</view>
 		</view>
 	</van-popup>
