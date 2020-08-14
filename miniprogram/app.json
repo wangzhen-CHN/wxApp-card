@@ -55,6 +55,8 @@
     "van-empty": "@vant/weapp/empty/index",
     "van-datetime-picker": "@vant/weapp/datetime-picker/index",
     "van-picker": "@vant/weapp/picker/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-notify": "@vant/weapp/notify/index",
     "van-cell-group": "@vant/weapp/cell-group/index"
   }
 }

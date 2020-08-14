@@ -35,56 +35,47 @@
 				</view>
 				<view wx:if="{{item.cardType==='CC'||item.cardType==='SCC'}}">账单日：每月{{item.payDay}}号</view>
 			</view>
-			
+
 		</view>
 		<van-empty wx:if="{{cardList.length==0}}" description="没有卡片" />
 	</view>
-	<!-- <view class="card-box">
-		<view wx:for="{{cardList}}" wx:key="_id" class="popup-card card-item {{activeCard==item.cardNo?'card-item-active':''}}">
-			<view class="popup-bank-logo" data-no="{{item.cardNo}}" bindtap="setActiveCard">
-				<image src="../../images/icon-bank/{{item.bankCode}}.png" style="width:300rpx;height:120rpx"></image>
-				<view class="card-card-num" wx:if="{{item.nickName}}">{{item.cardTypeName}} {{item.nickName}}</view>
-				<view class="card-card-num" wx:else>{{item.cardTypeName}} {{filter.formatStr(item.cardNo,4)}}</view>
-			</view>
-			<view class="popup-card-num" bindtap="doubleClick" data-time="{{lastTapTime}}" data-cardNo="{{item.cardNo}}">{{item.cardNo}}</view>
-			<view class="popup-card-footer">
-				<view class="popup-card-billday" wx:if="{{item.cardType==='CC'||item.cardType==='SCC'}}">账单日：每月{{item.payDay}}号</view>
-				<view class="popup-card-billday" wx:else>{{item.nickName}}</view>
-				<view class="popup-card-org">
-					<image src="../../images/icon-bank/card-org/card-{{item.cardOrg}}.png" style="width:60px;height:60px"></image>
-				</view>
-			</view>
-		</view>
-	</view> -->
-	<!-- <van-button bind:click="handleAdd" block>添加卡片</van-button> -->
-	<van-popup show="{{ popupShow }}" round duration="500" position="bottom" custom-style="height: 80%;padding-top:20px" bind:close="onPopupClose">
+	<van-popup show="{{ popupShow||popupShowDetail }}" round duration="500" position="bottom" custom-style="height: 80%;padding-top:20px" bind:close="onPopupClose">
 		<view class="popup-card">
 			<view class="popup-bank-logo">
-				<image wx:if="{{bankIcon}}" src="{{bankIcon}}" style="width:300rpx;height:120rpx"></image>
+				<image wx:if="{{cardInfo.bankIcon}}" src="{{cardInfo.bankIcon}}" style="width:300rpx;height:120rpx"></image>
 				<van-skeleton wx:else title avatar avatar-size="40px" animate="{{false}}" />
 			</view>
-			<view class="popup-card-num">{{cardNo}}</view>
+			<view class="popup-card-num">{{cardInfo.showCardNo||'**** **** **** ****'}}</view>
 			<view class="popup-card-footer">
-				<view class="popup-card-billday">账单日：每月{{billday}}号</view>
+				<!-- <view class="popup-card-billday" wx:if="{{payDay}}">还款日：每月{{payDay}}号</view> -->
+				<view class="popup-card-cardType">
+					<view wx:if="{{cardInfo.cardTypeName}}">{{cardInfo.cardTypeName}}</view>
+					<van-skeleton wx:else row="1" animate="{{false}}" />
+				</view>
 				<view class="popup-card-org">
-					<image wx:if="{{orgIcon}}" src="{{orgIcon}}" style="width:60px;height:60px"></image>
-					<van-skeleton wx:else title title-width="70" animate="{{false}}" />
+					<image wx:if="{{cardInfo.orgIcon}}" src="{{cardInfo.orgIcon}}" style="width:60px;height:60px"></image>
+					<van-skeleton wx:else title title-width="55px" animate="{{false}}" />
 				</view>
 			</view>
 		</view>
 		<view style="margin-top:20px">
 			<van-cell-group>
-				<van-field data-params="cardNo" bind:change="getBankInfo" bind:clear="clearBankInfo" type="number" label="银行卡号" maxlength="20" placeholder="请输入银行卡号" clearable />
-				<van-field data-params="payDay" bind:blur="setFormValue" type="number" label="还款日" maxlength="2" placeholder="请输入还款日" wx:if="{{cardType==='CC'||cardType==='SCC'}}" clearable />
-				<van-field data-params="limit" bind:blur="setFormValue" type="number" label="额度" maxlength="7" placeholder="请输入额度" wx:if="{{cardType==='CC'||cardType==='SCC'}}" clearable />
-				<van-field data-params="cvv" bind:blur="setFormValue" type="number" label="CVV" maxlength="3" placeholder="请输入CVV" wx:if="{{cardType==='CC'||cardType==='SCC'}}" clearable />
-				<van-field data-params="nickName" bind:blur="setFormValue" type="text" label="别名" maxlength="20" placeholder="请输入别名" wx:if="{{cardType==='CC'||cardType==='SCC'}}" clearable />
+				<van-field data-params="cardNo" model:value="{{ cardInfo.showCardNo }}" readonly="{{popupShowDetail}}" required bind:change="getBankInfo" bind:clear="clearBankInfo" type="number" label="银行卡号" maxlength="23" placeholder="请输入银行卡号" clearable />
+				<view wx:if="{{cardInfo.cardType==='CC'||cardInfo.cardType==='SCC'}}">
+					<van-field type="number" readonly="{{popupShowDetail}}" model:value="{{ payDay }}" label="还款日" maxlength="2" placeholder="请输入还款日" clearable />
+					<van-field type="number" readonly="{{popupShowDetail}}" model:value="{{ limit }}" label="额度" maxlength="7" placeholder="请输入额度" clearable />
+					<van-field type="number" readonly="{{popupShowDetail}}" model:value="{{ cvv }}" label="CVV" maxlength="3" placeholder="请输入CVV" clearable />
+					<van-field type="number" readonly="{{popupShowDetail}}" model:value="{{ validity }}" label="有效期" maxlength="5" placeholder="请输入有效期 YYMM" clearable />
+				</view>
 			</van-cell-group>
-			<view class="popup-btn">
-				<!-- <button round plain block type="primary" bindtap="formSubmit">确定</button> -->
-				<van-button plain block type="info" bindtap="formSubmit">确定</van-button>
-				<!-- <van-button plain hairline type="info">细边框按钮</van-button> -->
-			</view>
+		</view>
+		<view class="popup-btn-box">
+			<van-button wx:if="{{popupShow||isEdit}}" class="popup-btn" round type="default" bindtap="onPopupClose">关闭</van-button>
+			<van-button wx:if="{{popupShow}}" class="popup-btn" round color="linear-gradient(to right, #4bb0ff, #6149f6)" bindtap="formSubmit">确定</van-button>
+			<van-button wx:if="{{popupShowDetail}}" class="popup-btn" round color="linear-gradient(to right, #ff6034, #ee0a24)" bindtap="handleDelete">删除</van-button>
+			<van-button wx:if="{{popupShowDetail}}" class="popup-btn" round color="linear-gradient(to right, #4bb0ff, #6149f6)" bindtap="handleEdit">编辑</van-button>
 		</view>
 	</van-popup>
+	<van-dialog id="van-dialog" />
+	<van-notify id="van-notify" />
 </view>
