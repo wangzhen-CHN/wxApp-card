@@ -2,19 +2,7 @@
   "pages": [
     "pages/cardList/cardList",
     "pages/activeList/activeList",
-    "pages/index/index",
-    "pages/userConsole/userConsole",
-    "pages/storageConsole/storageConsole",
-    "pages/databaseGuide/databaseGuide",
-    "pages/addFunction/addFunction",
-    "pages/deployFunctions/deployFunctions",
-    "pages/chooseLib/chooseLib",
-    "pages/openapi/openapi",
-    "pages/openapi/serverapi/serverapi",
-    "pages/openapi/callback/callback",
-    "pages/openapi/cloudid/cloudid",
-    "pages/im/im",
-    "pages/im/room/room"
+    "pages/me/me"
   ],
   "tabBar": {
     "color": "#888d93",
@@ -33,7 +21,7 @@
     }, {
       "selectedIconPath": "./images/me-a.png",
       "iconPath": "./images/me.png",
-      "pagePath": "pages/index/index",
+      "pagePath": "pages/me/me",
       "text": "我的"
     }]
   },
@@ -41,7 +29,7 @@
     "backgroundColor": "#f4f4f4",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#f4f4f4",
-    "navigationBarTitleText": "ka宝库",
+    "navigationBarTitleText": "ka卡COOL~",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",
@@ -57,6 +45,9 @@
     "van-picker": "@vant/weapp/picker/index",
     "van-dialog": "@vant/weapp/dialog/index",
     "van-notify": "@vant/weapp/notify/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+    "van-image": "@vant/weapp/image/index",
     "van-cell-group": "@vant/weapp/cell-group/index"
   }
 }

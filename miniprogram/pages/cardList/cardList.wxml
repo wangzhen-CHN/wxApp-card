@@ -35,7 +35,6 @@
 				</view>
 				<view wx:if="{{item.cardType==='CC'||item.cardType==='SCC'}}">账单日：每月{{item.payDay}}号</view>
 			</view>
-
 		</view>
 		<van-empty wx:if="{{cardList.length==0}}" description="没有卡片" />
 	</view>
@@ -47,7 +46,6 @@
 			</view>
 			<view class="popup-card-num">{{cardInfo.showCardNo||'**** **** **** ****'}}</view>
 			<view class="popup-card-footer">
-				<!-- <view class="popup-card-billday" wx:if="{{payDay}}">还款日：每月{{payDay}}号</view> -->
 				<view class="popup-card-cardType">
 					<view wx:if="{{cardInfo.cardTypeName}}">{{cardInfo.cardTypeName}}</view>
 					<van-skeleton wx:else row="1" animate="{{false}}" />
@@ -58,7 +56,7 @@
 				</view>
 			</view>
 		</view>
-		<view style="margin-top:20px">
+		<view style="margin:10px 20px">
 			<van-cell-group>
 				<van-field data-params="cardNo" model:value="{{ cardInfo.showCardNo }}" readonly="{{popupShowDetail}}" required bind:change="getBankInfo" bind:clear="clearBankInfo" type="number" label="银行卡号" maxlength="23" placeholder="请输入银行卡号" clearable />
 				<view wx:if="{{cardInfo.cardType==='CC'||cardInfo.cardType==='SCC'}}">

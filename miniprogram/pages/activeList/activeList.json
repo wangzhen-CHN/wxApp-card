@@ -1,4 +1,5 @@
 {
-  "navigationBarTitleText": "ka卡酷~",
+  "navigationBarBackgroundColor": "#3889ff",
+  "navigationBarTextStyle": "white",
   "usingComponents": {}
 }

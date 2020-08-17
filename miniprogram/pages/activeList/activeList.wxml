@@ -1,26 +1,55 @@
-<!--cardlist.wxml-->
+<!--activitylist.wxml-->
 <view>
-	<view class="card-list-title">
-		<view class="card-title-name">全部活动</view>
-		<view class="card-title-add">
+	<view class="activity-top">
+		<image src="../../images/activity-bg.png"></image>
+		<view class="activity-top-name">活动资讯</view>
+	</view>
+	<view class="activity-list-title">
+		<view class="activity-title-name">全部活动</view>
+		<view class="activity-title-add">
 			<van-icon name="plus" bind:click="handleAdd" />
 		</view>
 	</view>
-	<van-popup show="{{ popupShow }}" round duration="500" position="bottom" custom-style="height: 60%;padding-top:20px" bind:close="onPopupClose">
-		<view style="margin-top:20px">
+	<view class="activity-box">
+		<van-empty wx:if="{{activityList.length===0}}" description="没有活动" />
+		<view class="activity-item" wx:if="{{activityList.length>0}}" wx:for="{{activityList}}" wx:key="_id">
+			<view class="activity-info-top">
+				<view class="activity-info-bankName">
+						<image src="../../images/bank/{{item.bankCode||'OTHER'}}.png" style="width:40rpx;height:40rpx"></image>
+						<span>{{item.bankName}}</span>
+				</view>
+				<view>
+					{{item.name}}
+				</view>
+			</view>
+			<view class="activity-info">
+			{{item.content}}
+			</view>
+			<view class="activity-info-bottom">
+				<view>
+					{{item.time}}
+				</view>
+			</view>
+		</view>
+	</view>
+	<van-popup show="{{ isShowBankPopup }}" round duration="500" z-index="200" position="bottom" bind:close="onBankPopupClose">
+	<van-picker columns="{{ columns }}" show-toolbar default-index="{{ 1 }}" title="" bind:cancel="onBankPopupClose" bind:confirm="onBankPickerConfirm"  />
+	</van-popup>
+	<van-popup show="{{ isShowPopup }}" round duration="500" position="bottom" custom-style="height: 60%;padding-top:20px" bind:close="onPopupClose">
+		<view style="margin:10px 20px">
 			<van-cell-group>
-				<van-field data-params="cardNo" type="text" label="银行" maxlength="20" placeholder="请输入银行" clearable />
-				<!-- <van-picker columns="{{ columns }}" /> -->
-				<van-field data-params="cardNo" type="text" label="活动名称" maxlength="20" placeholder="请输入活动名称" clearable />
-				<van-field data-params="cardNo" type="textarea" autosize="{{ minHeight }}" label="活动内容"  clearable />
-				<van-field data-params="cardNo" type="text" label="起止时间" maxlength="20" placeholder="请输入起止时间" clearable />
-				<!-- <van-datetime-picker type="date"/> -->
-				<van-field data-params="cardNo" type="text" label="备注" maxlength="20" placeholder="请输入备注" clearable />
+				<van-cell title="活动方" value="{{bankName}}" is-link bind:click="onBankPopup" />
+				<!-- <van-field type="text" label="银行名称" model:value="{{ bankName }}" is-link maxlength="20" placeholder="银行名称" bind:click="onBankPopup" /> -->
+				<van-field type="text" label="活动对象" model:value="{{ name }}" maxlength="10" placeholder="请输入活动名称" clearable />
+				<van-field type="text" label="活动内容" model:value="{{ content }}" maxlength="200" placeholder="请输入活动内容" clearable />
+				<van-field type="text" label="起止时间" model:value="{{ time }}" maxlength="35" placeholder="请输入起止时间" clearable />
+				<van-field type="text" label="备注" model:value="{{ remake }}" maxlength="20" placeholder="请输入备注" clearable />
 			</van-cell-group>
-			<view class="popup-btn">
-				<!-- <button round plain block type="primary" bindtap="formSubmit">确定</button> -->
-				<van-button plain block type="info" bindtap="formSubmit">确定</van-button>
-				<!-- <van-button plain hairline type="info">细边框按钮</van-button> -->
+			<view class="popup-btn-box">
+				<van-button wx:if="{{isShowPopup||isEdit}}" class="popup-btn" round type="default" bindtap="onPopupClose">关闭</van-button>
+				<van-button wx:if="{{isShowPopup}}" class="popup-btn" round color="linear-gradient(to right, #4bb0ff, #6149f6)" bindtap="formSubmit">确定</van-button>
+				<van-button wx:if="{{showPopupDetail}}" class="popup-btn" round color="linear-gradient(to right, #ff6034, #ee0a24)" bindtap="handleDelete">删除</van-button>
+				<van-button wx:if="{{showPopupDetail}}" class="popup-btn" round color="linear-gradient(to right, #4bb0ff, #6149f6)" bindtap="handleEdit">编辑</van-button>
 			</view>
 		</view>
 	</van-popup>

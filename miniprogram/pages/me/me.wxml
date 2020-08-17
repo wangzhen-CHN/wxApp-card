@@ -1,0 +1,18 @@
+<!--pages/me/me.wxml-->
+<view>
+	<view class="about-me">
+		<van-image round width="10rem" height="10rem" src="http://img.mo36.com/card-logo.png" />
+		<view class="app-name">
+			ka卡COOL~
+		</view>
+		<view class="app-version">
+			1.0.1
+		</view>
+	</view>
+	<view class="app-info">
+		<van-cell-group>
+			<van-cell title="关于作者" value="前端程序员--汪振" />
+			<van-cell title="免责声明" value="仅限学习交流，禁止商用" />
+		</van-cell-group>
+	</view>
+</view>
